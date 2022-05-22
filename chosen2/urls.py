@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+from noticeboard.views import RegisterView
 import noticeboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('noticeboard.urls')),
+    path('register/', RegisterView.as_view(), name='auth_register'),
     path('api-auth/', include('rest_framework.urls')),
 ]

@@ -4,7 +4,9 @@ from noticeboard import views
 from students import views1
 from django.contrib.auth.models import User
 from rest_framework.authtoken.views import obtain_auth_token
+from .views import RegisterView
 urlpatterns = [
+    path('register/', RegisterView.as_view(), name='auth_register'),
     path('id/', views1.PostListx.as_view()),
     path('id/<int:pk>/', views1.PostDetailx.as_view()),
     path('units/', views1.unitListx.as_view()),

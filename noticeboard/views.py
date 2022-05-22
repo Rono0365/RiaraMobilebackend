@@ -5,7 +5,11 @@ from noticeboard.models import Post
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-
+from .serializers import RegisterSerializer
+from rest_framework.permissions import IsAuthenticated
+ 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
 class CustomAuthToken(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
@@ -30,7 +34,10 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = serializers.PostSerializer
 
-    
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    #permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
